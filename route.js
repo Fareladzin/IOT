@@ -38,4 +38,12 @@ module.exports = function(app) {
     //ADD DEVICE
     app.route('/device/add')
     .post(devices.create);
+
+    //ON DEVICE
+    app.route('/device/on/:_id')
+    .put(devices.on);
+
+    //OFF DEVICE
+    app.route('/device/off/:_id')
+    .put(devices.off);
 }

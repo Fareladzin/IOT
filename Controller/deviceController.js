@@ -113,3 +113,51 @@ exports.update = (req, res) => {
         });
     });
 };
+
+exports.on = (req, res) => {
+    // Find note and update status = 1
+    Device.findByIdAndUpdate(req.params._id, { 
+        status: 1
+    }, {new: true})
+    .then(device => {
+        if(!device) {
+            return res.status(404).send({
+                message: "Device not found with id" + req.params._id
+            });
+        }
+        res.send(device);
+    }).catch(err => {
+        if(err.kind === '_id') {
+            return res.status(404).send({
+                message: "Device not found with id " + req.params._id
+            });                
+        }
+        return res.status(500).send({
+            message: "Error updating Device with id " + req.params._id
+        });
+    });
+};
+
+exports.off = (req, res) => {
+    // Find note and update status = 1
+    Device.findByIdAndUpdate(req.params._id, { 
+        status: 0
+    }, {new: true})
+    .then(device => {
+        if(!device) {
+            return res.status(404).send({
+                message: "Device not found with id" + req.params._id
+            });
+        }
+        res.send(device);
+    }).catch(err => {
+        if(err.kind === '_id') {
+            return res.status(404).send({
+                message: "Device not found with id " + req.params._id
+            });                
+        }
+        return res.status(500).send({
+            message: "Error updating Device with id " + req.params._id
+        });
+    });
+};
